@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.marius.personalimdb.ui.tvShows.ItemTvShowViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="137dp"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:onClick="@{() -> viewModel.onClick()}"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/poster"
+            imageDimension="@{viewModel.posterDimension}"
+            imageSource="@{viewModel.poster}"
+            android:layout_width="0dp"
+            android:layout_height="175dp"
+            android:layout_margin="4dp"
+            android:elevation="2dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toTopOf="@id/title"
+            app:layout_constraintDimensionRatio="w,27:41"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:gravity="center"
+            android:text="@{viewModel.title}"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toTopOf="@id/releaseDate"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/poster" />
+
+        <TextView
+            android:id="@+id/releaseDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:text="@{viewModel.releaseYear}"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
