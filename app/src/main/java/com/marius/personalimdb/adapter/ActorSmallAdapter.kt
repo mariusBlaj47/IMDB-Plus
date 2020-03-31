@@ -8,11 +8,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.marius.personalimdb.R
 import com.marius.personalimdb.data.model.Actor
 import com.marius.personalimdb.databinding.ItemActorSmallBinding
-import com.marius.personalimdb.helper.OpensActorDetails
+import com.marius.personalimdb.helper.interfaces.OpensActorDetails
 import com.marius.personalimdb.ui.actors.ItemActorViewModel
 
 class ActorSmallAdapter(private val callback: OpensActorDetails) :
-    RecyclerView.Adapter<ActorSmallAdapter.ActorVH>(), OpensActorDetails {
+    RecyclerView.Adapter<ActorSmallAdapter.ActorVH>(),
+    OpensActorDetails {
     override fun onActorClicked(actorId: Int) {
         callback.onActorClicked(actorId)
     }

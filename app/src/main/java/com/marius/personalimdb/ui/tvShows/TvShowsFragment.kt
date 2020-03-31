@@ -8,10 +8,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.marius.personalimdb.R
-import com.marius.personalimdb.ui.tvShows.category.popular.TvShowsPopularFragment
+import com.marius.personalimdb.ui.tvShows.category.airing.TvShowsAiringFragment
 import com.marius.personalimdb.ui.tvShows.category.top.TvShowsTopFragment
 import com.marius.personalimdb.ui.tvShows.category.trending.TvShowsTrendingFragment
-import com.marius.personalimdb.ui.tvShows.category.upcoming.TvShowsUpcomingFragment
+import com.marius.personalimdb.ui.tvShows.category.netflix.TvShowsNetflixFragment
 import kotlinx.android.synthetic.main.fragment_tv_shows.*
 
 class TvShowsFragment : Fragment() {
@@ -38,7 +38,7 @@ class TvShowsFragment : Fragment() {
     internal inner class ViewPagerAdapter(manager: FragmentManager, _pageCount: Int) :
         FragmentPagerAdapter(manager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
         private var pageCount = 0
-        private var titles = arrayOf("Trending", "Popular", "Upcoming", "Top Rated")
+        private var titles = arrayOf("Trending", "Airing", "Netflix", "Top Rated")
 
         init {
             pageCount = _pageCount
@@ -47,8 +47,8 @@ class TvShowsFragment : Fragment() {
         override fun getItem(position: Int): Fragment {
             return when (position) {
                 0 -> TvShowsTrendingFragment()
-                1 -> TvShowsPopularFragment()
-                2 -> TvShowsUpcomingFragment()
+                1 -> TvShowsAiringFragment()
+                2 -> TvShowsNetflixFragment()
                 else -> TvShowsTopFragment()
             }
         }

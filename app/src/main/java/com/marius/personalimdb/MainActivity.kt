@@ -1,5 +1,7 @@
 package com.marius.personalimdb
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -16,6 +18,8 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
 import com.marius.personalimdb.data.Account
+import com.marius.personalimdb.data.model.TvShow
+import com.marius.personalimdb.service.NotificationService
 import com.marius.personalimdb.ui.login.LoginActivity
 import com.marius.personalimdb.ui.search.SearchActivity
 import kotlinx.android.synthetic.main.nav_header_main.view.*
@@ -24,13 +28,32 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
 
+    val tvShowList = mutableListOf<TvShow>()
+    var totalPages = 1
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
+        createNotificationChannel()
         getUserData()
         setUpDrawer()
+        //check if new episodes are out
+        startService(Intent(this, NotificationService::class.java))
+    }
+
+    private fun createNotificationChannel() {
+        val mNotificationManager =
+            getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            val channel = NotificationChannel(
+                "Episodes_47",
+                "Imdb_plus_service",
+                NotificationManager.IMPORTANCE_DEFAULT
+            )
+            mNotificationManager.createNotificationChannel(channel)
+        }
     }
 
     private fun getUserData() {

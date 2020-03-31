@@ -2,20 +2,25 @@ package com.marius.personalimdb.ui.search
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.room.Room
 import com.marius.personalimdb.R
 import com.marius.personalimdb.adapter.SearchContentAdapter
+import com.marius.personalimdb.database.HistoryDatabase
+import com.marius.personalimdb.database.WatchlistDatabase
 import com.marius.personalimdb.databinding.ActivitySearchBinding
-import com.marius.personalimdb.helper.OpensDetails
+import com.marius.personalimdb.helper.interfaces.OpensDetails
 import com.marius.personalimdb.ui.actors.details.ActorDetailsActivity
 import com.marius.personalimdb.ui.movies.details.MovieDetailsActivity
 import com.marius.personalimdb.ui.tvShows.details.TvShowDetailsActivity
 import kotlinx.android.synthetic.main.activity_search.*
+import kotlin.concurrent.thread
 
 
 class SearchActivity : AppCompatActivity(), OpensDetails {
@@ -23,6 +28,7 @@ class SearchActivity : AppCompatActivity(), OpensDetails {
         val intent = Intent(this, ActorDetailsActivity::class.java).apply {
             putExtra("actorId", actorId)
         }
+        viewModel.saveHistoryItem(actorId,"Actor")
         startActivity(intent)
     }
 
@@ -30,6 +36,7 @@ class SearchActivity : AppCompatActivity(), OpensDetails {
         val intent = Intent(this, TvShowDetailsActivity::class.java).apply {
             putExtra("tvShowId", tvShowId)
         }
+        viewModel.saveHistoryItem(tvShowId,"TvShow")
         startActivity(intent)
     }
 
@@ -38,6 +45,7 @@ class SearchActivity : AppCompatActivity(), OpensDetails {
         val intent = Intent(this, MovieDetailsActivity::class.java).apply {
             putExtra("movieId", movieId)
         }
+        viewModel.saveHistoryItem(movieId,"Movie")
         startActivity(intent)
     }
 
@@ -46,6 +54,7 @@ class SearchActivity : AppCompatActivity(), OpensDetails {
     }
 
     private val searchAdapter = SearchContentAdapter(this)
+    private lateinit var db: HistoryDatabase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,10 +67,22 @@ class SearchActivity : AppCompatActivity(), OpensDetails {
         searchView.requestFocus()
         setUpObservers()
         setUpRecyclerView()
+        setUpHistory()
 
         backBtn.setOnClickListener {
             finish()
         }
+    }
+
+    private fun setUpHistory() {
+        db = Room.databaseBuilder(
+            applicationContext,
+            HistoryDatabase::class.java, "history"
+        ).fallbackToDestructiveMigration().build()
+        thread {
+            Log.d("History",db.historyDao().getAll().toString())
+        }
+        viewModel.setHistory(db)
     }
 
     private fun setUpRecyclerView() {

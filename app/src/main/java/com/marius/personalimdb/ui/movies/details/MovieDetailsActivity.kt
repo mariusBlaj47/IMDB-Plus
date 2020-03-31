@@ -17,13 +17,15 @@ import com.marius.personalimdb.adapter.ActorSmallAdapter
 import com.marius.personalimdb.adapter.ImagePagerAdapter
 import com.marius.personalimdb.adapter.MovieSmallAdapter
 import com.marius.personalimdb.databinding.ActivityMovieDetailsBinding
-import com.marius.personalimdb.helper.OpensActorDetails
-import com.marius.personalimdb.helper.OpensMovieDetails
-import com.marius.personalimdb.helper.OpensYoutube
+import com.marius.personalimdb.helper.interfaces.OpensActorDetails
+import com.marius.personalimdb.helper.interfaces.OpensMovieDetails
+import com.marius.personalimdb.helper.interfaces.OpensYoutube
 import com.marius.personalimdb.ui.actors.details.ActorDetailsActivity
 import kotlinx.android.synthetic.main.activity_movie_details.*
 
-class MovieDetailsActivity : AppCompatActivity(), OpensMovieDetails, OpensActorDetails,
+class MovieDetailsActivity : AppCompatActivity(),
+    OpensMovieDetails,
+    OpensActorDetails,
     OpensYoutube {
 
     override fun onVideoClicked() {
@@ -75,7 +77,6 @@ class MovieDetailsActivity : AppCompatActivity(), OpensMovieDetails, OpensActorD
             viewModel.getData(it)
             Log.d("movieId", it.toString())
         }
-
         imagesViewPager.adapter = pagerAdapter
         setUpObservers()
         setUpRecyclerViews()

@@ -8,13 +8,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.marius.personalimdb.R
 import com.marius.personalimdb.data.model.Movie
 import com.marius.personalimdb.databinding.ItemMovieSmallBinding
-import com.marius.personalimdb.helper.OpensMovieDetails
+import com.marius.personalimdb.helper.interfaces.OpensMovieDetails
 import com.marius.personalimdb.ui.movies.ItemMovieViewModel
 
 class MovieSmallAdapter(
     private val callback: OpensMovieDetails
 ) :
-    RecyclerView.Adapter<MovieSmallAdapter.MovieVH>(), OpensMovieDetails {
+    RecyclerView.Adapter<MovieSmallAdapter.MovieVH>(),
+    OpensMovieDetails {
 
 
     private val movieList = mutableListOf<Movie>()

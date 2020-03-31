@@ -2,7 +2,7 @@ package com.marius.personalimdb.ui.actors
 
 import androidx.lifecycle.MutableLiveData
 import com.marius.personalimdb.data.model.Actor
-import com.marius.personalimdb.helper.OpensActorDetails
+import com.marius.personalimdb.helper.interfaces.OpensActorDetails
 
 class ItemActorViewModel(actor: Actor, private val callback: OpensActorDetails) {
     val actor = MutableLiveData<Actor>()

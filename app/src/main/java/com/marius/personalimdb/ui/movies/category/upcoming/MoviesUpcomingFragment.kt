@@ -12,11 +12,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.marius.personalimdb.R
 import com.marius.personalimdb.adapter.MovieAdapter
-import com.marius.personalimdb.helper.OpensMovieDetails
+import com.marius.personalimdb.helper.interfaces.OpensMovieDetails
 import com.marius.personalimdb.ui.movies.details.MovieDetailsActivity
 import kotlinx.android.synthetic.main.fragment_movies_upcoming.*
 
-class MoviesUpcomingFragment : Fragment(), OpensMovieDetails {
+class MoviesUpcomingFragment : Fragment(),
+    OpensMovieDetails {
 
     override fun onMovieClicked(movieId: Int) {
         val intent = Intent(context, MovieDetailsActivity::class.java).apply {

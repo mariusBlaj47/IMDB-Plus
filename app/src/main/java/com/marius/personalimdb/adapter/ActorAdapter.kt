@@ -9,11 +9,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.marius.personalimdb.R
 import com.marius.personalimdb.data.model.Actor
 import com.marius.personalimdb.databinding.ItemActorBinding
-import com.marius.personalimdb.helper.OpensActorDetails
+import com.marius.personalimdb.helper.interfaces.OpensActorDetails
 import com.marius.personalimdb.ui.actors.ItemActorViewModel
 
 class ActorAdapter(private val callback: OpensActorDetails) :
-    RecyclerView.Adapter<ActorAdapter.ViewHolder>(), OpensActorDetails {
+    RecyclerView.Adapter<ActorAdapter.ViewHolder>(),
+    OpensActorDetails {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return when (viewType) {
             actor -> {

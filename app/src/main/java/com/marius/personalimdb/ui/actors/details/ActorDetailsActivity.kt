@@ -14,13 +14,15 @@ import com.marius.personalimdb.adapter.ImagePagerAdapter
 import com.marius.personalimdb.adapter.MovieSmallAdapter
 import com.marius.personalimdb.adapter.TvShowSmallAdapter
 import com.marius.personalimdb.databinding.ActivityActorDetailsBinding
-import com.marius.personalimdb.helper.OpensMovieDetails
-import com.marius.personalimdb.helper.OpensTvShowDetails
+import com.marius.personalimdb.helper.interfaces.OpensMovieDetails
+import com.marius.personalimdb.helper.interfaces.OpensTvShowDetails
 import com.marius.personalimdb.ui.movies.details.MovieDetailsActivity
 import com.marius.personalimdb.ui.tvShows.details.TvShowDetailsActivity
 import kotlinx.android.synthetic.main.activity_actor_details.*
 
-class ActorDetailsActivity : AppCompatActivity(), OpensMovieDetails, OpensTvShowDetails {
+class ActorDetailsActivity : AppCompatActivity(),
+    OpensMovieDetails,
+    OpensTvShowDetails {
     override fun onTvShowClicked(tvShowId: Int) {
         val intent = Intent(this, TvShowDetailsActivity::class.java).apply {
             putExtra("tvShowId", tvShowId)
@@ -88,7 +90,6 @@ class ActorDetailsActivity : AppCompatActivity(), OpensMovieDetails, OpensTvShow
             }
         })
         viewModel.posters.observe(this, Observer {
-            Log.d("asde", it.toString())
             pagerAdapter.addPhotos(it.toMutableList())
             indicator.setViewPager(imagesPager)
         })

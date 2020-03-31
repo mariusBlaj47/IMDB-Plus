@@ -12,11 +12,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.marius.personalimdb.R
 import com.marius.personalimdb.adapter.TvShowAdapter
-import com.marius.personalimdb.helper.OpensTvShowDetails
+import com.marius.personalimdb.helper.interfaces.OpensTvShowDetails
 import com.marius.personalimdb.ui.tvShows.details.TvShowDetailsActivity
 import kotlinx.android.synthetic.main.fragment_tv_shows_top.*
 
-class TvShowsTopFragment : Fragment(), OpensTvShowDetails {
+class TvShowsTopFragment : Fragment(),
+    OpensTvShowDetails {
     override fun onTvShowClicked(tvShowId: Int) {
         val intent = Intent(context, TvShowDetailsActivity::class.java).apply {
             putExtra("tvShowId", tvShowId)

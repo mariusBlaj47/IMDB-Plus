@@ -9,11 +9,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.marius.personalimdb.R
 import com.marius.personalimdb.data.model.Movie
 import com.marius.personalimdb.databinding.ItemMovieBinding
-import com.marius.personalimdb.helper.OpensMovieDetails
+import com.marius.personalimdb.helper.interfaces.OpensMovieDetails
 import com.marius.personalimdb.ui.movies.ItemMovieViewModel
 
 class MovieAdapter(private val callback: OpensMovieDetails) :
-    RecyclerView.Adapter<MovieAdapter.ViewHolder>(), OpensMovieDetails {
+    RecyclerView.Adapter<MovieAdapter.ViewHolder>(),
+    OpensMovieDetails {
     override fun onMovieClicked(movieId: Int) {
         callback.onMovieClicked(movieId)
     }

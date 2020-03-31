@@ -40,7 +40,7 @@ class MoviesFragment : Fragment() {
     internal inner class ViewPagerAdapter(manager: FragmentManager, _pageCount: Int) :
         FragmentPagerAdapter(manager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
         private var pageCount = 0
-        private var titles = arrayOf("Trending", "Popular", "Upcoming", "Top Rated")
+        private var titles = arrayOf("Popular", "Upcoming", "Trending", "Top Rated")
 
         init {
             pageCount = _pageCount
@@ -48,9 +48,9 @@ class MoviesFragment : Fragment() {
 
         override fun getItem(position: Int): Fragment {
             return when (position) {
-                0 -> MoviesTrendingFragment()
-                1 -> MoviesPopularFragment()
-                2 -> MoviesUpcomingFragment()
+                0 -> MoviesPopularFragment()
+                1 -> MoviesUpcomingFragment()
+                2 -> MoviesTrendingFragment()
                 else -> MoviesTopFragment()
             }
         }

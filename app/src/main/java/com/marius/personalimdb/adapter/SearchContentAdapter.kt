@@ -14,13 +14,14 @@ import com.marius.personalimdb.data.model.TvShow
 import com.marius.personalimdb.databinding.ItemActorBinding
 import com.marius.personalimdb.databinding.ItemMovieBinding
 import com.marius.personalimdb.databinding.ItemTvShowBinding
-import com.marius.personalimdb.helper.OpensDetails
+import com.marius.personalimdb.helper.interfaces.OpensDetails
 import com.marius.personalimdb.ui.actors.ItemActorViewModel
 import com.marius.personalimdb.ui.movies.ItemMovieViewModel
 import com.marius.personalimdb.ui.tvShows.ItemTvShowViewModel
 
 class SearchContentAdapter(private val callback: OpensDetails) :
-    RecyclerView.Adapter<SearchContentAdapter.ViewHolder>(), OpensDetails {
+    RecyclerView.Adapter<SearchContentAdapter.ViewHolder>(),
+    OpensDetails {
     override fun onActorClicked(actorId: Int) {
         callback.onActorClicked(actorId)
     }

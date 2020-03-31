@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.marius.moviedatabase.retrofitApi.TmdbServiceFactory
 import com.marius.personalimdb.data.model.TvShow
+import com.marius.personalimdb.data.repository.TvShowRepository
 import com.marius.personalimdb.data.response.SearchTvShowResponse
 import com.marius.personalimdb.helper.filterAllTvShows
 import retrofit2.Call
@@ -29,30 +30,12 @@ class TvShowsTrendingViewModel : ViewModel() {
             return
         if (!isLoading) {
             isLoading = true
-            TmdbServiceFactory.tmdbtvShowService.getTrendingTvShows(
-                TmdbServiceFactory.API_KEY,
-                page
-            )
-                .enqueue(object : Callback<SearchTvShowResponse> {
-                    override fun onFailure(call: Call<SearchTvShowResponse>, t: Throwable) {
-                        Log.d("TvShow", t.localizedMessage)
-                    }
-
-                    override fun onResponse(
-                        call: Call<SearchTvShowResponse>,
-                        response: Response<SearchTvShowResponse>
-                    ) {
-                        lastLoadedPage++
-                        response.body()?.totalPages?.let { pages ->
-                            totalPages = pages
-                        }
-                        response.body()?.results?.let {
-                            tvShowList.value = it.filterAllTvShows()
-                        }
-                        isLoading = false
-                    }
-
-                })
+            TvShowRepository.getTrendingTvShows(page){ details ->
+                tvShowList.value = details.tvShowList
+                totalPages = details.totalPages
+                lastLoadedPage++
+                isLoading = false
+            }
         }
     }
 }

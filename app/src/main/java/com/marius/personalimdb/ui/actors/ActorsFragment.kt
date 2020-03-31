@@ -9,9 +9,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.marius.personalimdb.R
 import com.marius.personalimdb.adapter.ActorAdapter
-import com.marius.personalimdb.helper.OpensActorDetails
+import com.marius.personalimdb.helper.interfaces.OpensActorDetails
 import com.marius.personalimdb.ui.actors.details.ActorDetailsActivity
 import kotlinx.android.synthetic.main.fragment_actors.*
 
@@ -47,7 +48,7 @@ class ActorsFragment : Fragment(), OpensActorDetails {
     private fun setUpObservers() {
         viewModel.actorList.observe(this, Observer {
             actorsAdapter.addItems(
-                it.toMutableList(), false
+                it.toMutableList(), true
             )
         })
     }
@@ -55,5 +56,14 @@ class ActorsFragment : Fragment(), OpensActorDetails {
     private fun setUpRecyclerView() {
         popularActorsRecycler.layoutManager = LinearLayoutManager(context)
         popularActorsRecycler.adapter = actorsAdapter
+        popularActorsRecycler.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+
+                if (!recyclerView.canScrollVertically(1)) {
+                    viewModel.getActors(viewModel.lastLoadedPage + 1)
+                }
+            }
+        })
     }
 }

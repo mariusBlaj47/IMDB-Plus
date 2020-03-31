@@ -9,11 +9,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.marius.personalimdb.R
 import com.marius.personalimdb.data.model.TvShow
 import com.marius.personalimdb.databinding.ItemTvShowBinding
-import com.marius.personalimdb.helper.OpensTvShowDetails
+import com.marius.personalimdb.helper.interfaces.OpensTvShowDetails
 import com.marius.personalimdb.ui.tvShows.ItemTvShowViewModel
 
 class TvShowAdapter(private val callback: OpensTvShowDetails) :
-    RecyclerView.Adapter<TvShowAdapter.ViewHolder>(), OpensTvShowDetails {
+    RecyclerView.Adapter<TvShowAdapter.ViewHolder>(),
+    OpensTvShowDetails {
     override fun onTvShowClicked(tvShowId: Int) {
         callback.onTvShowClicked(tvShowId)
     }

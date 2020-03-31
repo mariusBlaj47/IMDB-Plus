@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.marius.personalimdb.R
 import com.marius.personalimdb.helper.Glider
-import com.marius.personalimdb.helper.OpensYoutube
+import com.marius.personalimdb.helper.interfaces.OpensYoutube
 import kotlinx.android.synthetic.main.item_photo.image
 import kotlinx.android.synthetic.main.item_video.*
 

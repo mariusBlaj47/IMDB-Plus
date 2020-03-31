@@ -1,16 +1,10 @@
 package com.marius.personalimdb.ui.watchlist.tv
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.marius.moviedatabase.retrofitApi.TmdbServiceFactory
 import com.marius.personalimdb.data.Account
 import com.marius.personalimdb.data.model.TvShow
-import com.marius.personalimdb.data.response.SearchTvShowResponse
-import com.marius.personalimdb.helper.filterAllTvShows
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.marius.personalimdb.data.repository.AccountRepository
 
 class WatchListTvShowsViewModel : ViewModel() {
     val tvShowList = MutableLiveData(emptyList<TvShow>())
@@ -19,6 +13,8 @@ class WatchListTvShowsViewModel : ViewModel() {
     var totalPages = 1
 
     fun initTvShows() {
+        lastLoadedPage = 0
+        totalPages = 1
         getTvShows(1)
     }
 
@@ -31,33 +27,12 @@ class WatchListTvShowsViewModel : ViewModel() {
         if (!isLoading) {
             isLoading = true
             Account.details.sessionId?.let { session ->
-                TmdbServiceFactory.tmdbAccountService.getWatchListTvShows(
-                    session,
-                    TmdbServiceFactory.API_KEY,
-                    page
-                )
-                    .enqueue(object : Callback<SearchTvShowResponse> {
-                        override fun onFailure(call: Call<SearchTvShowResponse>, t: Throwable) {
-                            Log.d("TvShow", t.localizedMessage)
-                        }
-
-                        override fun onResponse(
-                            call: Call<SearchTvShowResponse>,
-                            response: Response<SearchTvShowResponse>
-                        ) {
-                            lastLoadedPage++
-                            response.body()?.totalPages?.let { pages ->
-                                totalPages = pages
-                            }
-                            response.body()?.results?.let {
-                                val filteredShows = it.filterAllTvShows().toMutableList()
-                                tvShowList.value = filteredShows
-
-                            }
-                            isLoading = false
-                        }
-
-                    })
+                AccountRepository.getWatchlistTvShows(session, page) { details ->
+                    tvShowList.value = details.tvShowList
+                    totalPages = details.totalPages
+                    lastLoadedPage++
+                    isLoading = false
+                }
             }
         }
     }

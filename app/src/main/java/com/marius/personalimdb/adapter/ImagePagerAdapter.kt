@@ -6,7 +6,7 @@ import androidx.fragment.app.FragmentPagerAdapter
 import com.marius.personalimdb.data.model.Media
 import com.marius.personalimdb.data.model.Photo
 import com.marius.personalimdb.data.model.Video
-import com.marius.personalimdb.helper.OpensYoutube
+import com.marius.personalimdb.helper.interfaces.OpensYoutube
 import com.marius.personalimdb.ui.ImageFragment
 
 class ImagePagerAdapter(

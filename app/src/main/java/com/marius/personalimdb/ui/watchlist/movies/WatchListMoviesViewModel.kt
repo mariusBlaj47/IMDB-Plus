@@ -3,14 +3,9 @@ package com.marius.personalimdb.ui.watchlist.movies
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.marius.moviedatabase.retrofitApi.TmdbServiceFactory
-import com.marius.moviedatabase.retrofitApi.responses.SearchMovieResponse
 import com.marius.personalimdb.data.Account
 import com.marius.personalimdb.data.model.Movie
-import com.marius.personalimdb.helper.filterAll
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.marius.personalimdb.data.repository.AccountRepository
 
 class WatchListMoviesViewModel : ViewModel() {
     val movieList = MutableLiveData(emptyList<Movie>())
@@ -19,6 +14,8 @@ class WatchListMoviesViewModel : ViewModel() {
     var totalPages = 1
 
     fun initMovies() {
+        lastLoadedPage = 0
+        totalPages = 1
         getMovies(1)
     }
 
@@ -31,32 +28,15 @@ class WatchListMoviesViewModel : ViewModel() {
         if (!isLoading) {
             isLoading = true
             Account.details.sessionId?.let { session ->
-                Log.d("Login", session)
-                TmdbServiceFactory.tmdbAccountService.getWatchListMovies(
-                    session,
-                    TmdbServiceFactory.API_KEY,
-                    page
-                )
-                    .enqueue(object : Callback<SearchMovieResponse> {
-                        override fun onFailure(call: Call<SearchMovieResponse>, t: Throwable) {
-                            Log.d("MoviesFragment", t.localizedMessage)
-                        }
-
-                        override fun onResponse(
-                            call: Call<SearchMovieResponse>,
-                            response: Response<SearchMovieResponse>
-                        ) {
-                            lastLoadedPage++
-                            response.body()?.totalPages?.let { pages ->
-                                totalPages = pages
-                            }
-                            response.body()?.results?.let {
-                                val movies = it.filterAll()
-                                movieList.value = movies
-                            }
-                            isLoading = false
-                        }
-                    })
+                AccountRepository.getWatchlistMovies(session, page) { details ->
+                    movieList.value = details.movieList
+                    details.movieList.forEach {
+                        Log.d("DEBUG", it.toString())
+                    }
+                    totalPages = details.totalPages
+                    lastLoadedPage++
+                    isLoading = false
+                }
             }
         }
     }

@@ -5,7 +5,7 @@ import android.text.Spanned
 import android.text.style.RelativeSizeSpan
 import android.text.style.SuperscriptSpan
 import com.marius.personalimdb.data.model.TvShow
-import com.marius.personalimdb.helper.OpensTvShowDetails
+import com.marius.personalimdb.helper.interfaces.OpensTvShowDetails
 import org.threeten.bp.LocalDate
 import org.threeten.bp.format.DateTimeFormatter
 

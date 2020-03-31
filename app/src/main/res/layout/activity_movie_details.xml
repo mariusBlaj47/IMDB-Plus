@@ -107,6 +107,14 @@
                     app:layout_constraintStart_toStartOf="@id/title"
                     app:layout_constraintTop_toBottomOf="@id/title" />
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/colorPrimary"
+                    app:layout_constraintBottom_toTopOf="@id/ratingDetails"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
                 <androidx.cardview.widget.CardView
                     android:id="@+id/ratingDetails"
                     android:layout_width="match_parent"
@@ -115,7 +123,7 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginBottom="8dp"
-                    android:backgroundTint="@color/colorPrimary"
+                    android:backgroundTint="@color/colorPrimaryDark"
                     app:cardCornerRadius="10dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -224,12 +232,21 @@
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.cardview.widget.CardView>
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/colorPrimary"
+                    app:layout_constraintBottom_toTopOf="@id/description"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ratingDetails" />
+
                 <androidx.cardview.widget.CardView
                     android:id="@+id/description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
-                    android:backgroundTint="@color/colorPrimary"
+                    android:backgroundTint="@color/colorPrimaryDark"
                     app:cardCornerRadius="10dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -246,12 +263,21 @@
 
                 </androidx.cardview.widget.CardView>
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/colorPrimary"
+                    app:layout_constraintBottom_toTopOf="@id/cast"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/description" />
+
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cast"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
-                    android:backgroundTint="@color/colorPrimary"
+                    android:backgroundTint="@color/colorPrimaryDark"
                     app:cardCornerRadius="10dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -281,34 +307,42 @@
                             android:layout_marginStart="4dp"
                             android:layout_marginEnd="4dp"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/castTv" />
 
                         <TextView
                             android:id="@+id/noCastTv"
                             android:layout_width="wrap_content"
-                            android:layout_height="150dp"
+                            android:layout_height="200dp"
                             android:gravity="center"
                             android:text="No cast available"
                             android:textColor="@color/white"
                             android:textSize="18sp"
                             android:visibility="gone"
-                            app:layout_constraintBottom_toBottomOf="@id/castRecycler"
-                            app:layout_constraintEnd_toEndOf="@id/castRecycler"
-                            app:layout_constraintStart_toStartOf="@id/castRecycler"
-                            app:layout_constraintTop_toTopOf="@id/castRecycler" />
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </androidx.cardview.widget.CardView>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/colorPrimary"
+                    app:layout_constraintBottom_toTopOf="@id/similar"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/cast" />
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/similar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
-                    android:backgroundTint="@color/colorPrimary"
+                    android:backgroundTint="@color/colorPrimaryDark"
                     app:cardCornerRadius="10dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -338,34 +372,42 @@
                             android:layout_marginStart="4dp"
                             android:layout_marginEnd="4dp"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/similarTv" />
 
                         <TextView
                             android:id="@+id/noSimilarTv"
                             android:layout_width="wrap_content"
-                            android:layout_height="150dp"
+                            android:layout_height="200dp"
                             android:gravity="center"
                             android:text="No similar movies available"
                             android:textColor="@color/white"
                             android:textSize="18sp"
                             android:visibility="gone"
-                            app:layout_constraintBottom_toBottomOf="@id/similarMovieRecycler"
-                            app:layout_constraintEnd_toEndOf="@id/similarMovieRecycler"
-                            app:layout_constraintStart_toStartOf="@id/similarMovieRecycler"
-                            app:layout_constraintTop_toTopOf="@id/similarMovieRecycler" />
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </androidx.cardview.widget.CardView>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/colorPrimary"
+                    app:layout_constraintBottom_toTopOf="@id/recommended"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/similar" />
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/recommended"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
-                    android:backgroundTint="@color/colorPrimary"
+                    android:backgroundTint="@color/colorPrimaryDark"
                     app:cardCornerRadius="10dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -396,23 +438,22 @@
                             android:layout_marginStart="4dp"
                             android:layout_marginEnd="4dp"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/recommendedTv" />
 
                         <TextView
                             android:id="@+id/noRecommendationTv"
                             android:layout_width="wrap_content"
-                            android:layout_height="150dp"
+                            android:layout_height="200dp"
                             android:gravity="center"
                             android:text="No recommendations available"
                             android:textColor="@color/white"
                             android:textSize="18sp"
                             android:visibility="gone"
-                            app:layout_constraintBottom_toBottomOf="@id/recommendedRecycler"
-                            app:layout_constraintEnd_toEndOf="@id/recommendedRecycler"
-                            app:layout_constraintStart_toStartOf="@id/recommendedRecycler"
-                            app:layout_constraintTop_toTopOf="@id/recommendedRecycler" />
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -81,7 +81,7 @@
                     android:id="@+id/duration"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="@{viewModel.duration}"
+                    android:text="@{viewModel.episodeDuration}"
                     android:textAlignment="textStart"
                     android:textColor="@color/white"
                     app:layout_constraintBottom_toBottomOf="@+id/releaseDate"
@@ -118,6 +118,14 @@
                     app:layout_constraintStart_toStartOf="@id/title"
                     app:layout_constraintTop_toBottomOf="@id/title" />
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/colorPrimary"
+                    app:layout_constraintBottom_toTopOf="@id/ratingDetails"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
                 <androidx.cardview.widget.CardView
                     android:id="@+id/ratingDetails"
                     android:layout_width="match_parent"
@@ -126,7 +134,7 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginBottom="8dp"
-                    android:backgroundTint="@color/colorPrimary"
+                    android:backgroundTint="@color/colorPrimaryDark"
                     app:cardCornerRadius="10dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -135,7 +143,8 @@
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginVertical="8dp">
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp">
 
                         <ImageButton
                             android:id="@+id/imdbLink"
@@ -191,7 +200,7 @@
                             android:layout_height="40dp"
                             android:src="@drawable/ic_themoviedb_"
                             app:layout_constraintBottom_toTopOf="@+id/themoviedbScore"
-                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintEnd_toStartOf="@id/episodeFollowBtn"
                             app:layout_constraintStart_toEndOf="@+id/imdbLink"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -231,16 +240,48 @@
                             app:layout_constraintStart_toStartOf="@id/themoviedbLink"
                             app:layout_constraintTop_toBottomOf="@+id/themoviedbScore" />
 
+                        <ImageButton
+                            android:id="@+id/episodeFollowBtn"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/ic_follow"
+                            android:tint="@color/white"
+                            android:onClick="@{()->viewModel.changeFollow()}"
+                            android:background="@null"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/themoviedbLink"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/followStatus"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Follow \n new episodes"
+                            android:gravity="center"
+                            android:textColor="#DDDDDD"
+                            app:layout_constraintEnd_toEndOf="@id/episodeFollowBtn"
+                            app:layout_constraintStart_toStartOf="@id/episodeFollowBtn"
+                            app:layout_constraintTop_toBottomOf="@id/episodeFollowBtn" />
+
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.cardview.widget.CardView>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/colorPrimary"
+                    app:layout_constraintBottom_toTopOf="@id/details"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ratingDetails" />
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/details"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
-                    android:backgroundTint="@color/colorPrimary"
+                    android:backgroundTint="@color/colorPrimaryDark"
                     app:cardCornerRadius="10dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -374,12 +415,21 @@
 
                 </androidx.cardview.widget.CardView>
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/colorPrimary"
+                    app:layout_constraintBottom_toTopOf="@id/description"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/details" />
+
                 <androidx.cardview.widget.CardView
                     android:id="@+id/description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
-                    android:backgroundTint="@color/colorPrimary"
+                    android:backgroundTint="@color/colorPrimaryDark"
                     app:cardCornerRadius="10dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -396,12 +446,21 @@
 
                 </androidx.cardview.widget.CardView>
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/colorPrimary"
+                    app:layout_constraintBottom_toTopOf="@id/cast"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/description" />
+
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cast"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
-                    android:backgroundTint="@color/colorPrimary"
+                    android:backgroundTint="@color/colorPrimaryDark"
                     app:cardCornerRadius="10dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -431,34 +490,42 @@
                             android:layout_marginStart="4dp"
                             android:layout_marginEnd="4dp"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/castTv" />
 
                         <TextView
                             android:id="@+id/noCastTv2"
                             android:layout_width="wrap_content"
-                            android:layout_height="150dp"
+                            android:layout_height="200dp"
                             android:gravity="center"
                             android:text="No cast available"
                             android:textColor="@color/white"
                             android:textSize="18sp"
                             android:visibility="gone"
-                            app:layout_constraintBottom_toBottomOf="@id/castRecycler2"
-                            app:layout_constraintEnd_toEndOf="@id/castRecycler2"
-                            app:layout_constraintStart_toStartOf="@id/castRecycler2"
-                            app:layout_constraintTop_toTopOf="@id/castRecycler2" />
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </androidx.cardview.widget.CardView>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/colorPrimary"
+                    app:layout_constraintBottom_toTopOf="@id/similar"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/cast" />
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/similar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
-                    android:backgroundTint="@color/colorPrimary"
+                    android:backgroundTint="@color/colorPrimaryDark"
                     app:cardCornerRadius="10dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -488,34 +555,42 @@
                             android:layout_marginStart="4dp"
                             android:layout_marginEnd="4dp"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/similarTv2" />
 
                         <TextView
                             android:id="@+id/noSimilarTv2"
                             android:layout_width="wrap_content"
-                            android:layout_height="150dp"
+                            android:layout_height="200dp"
                             android:gravity="center"
                             android:text="No similar TV Shows available"
                             android:textColor="@color/white"
                             android:textSize="18sp"
                             android:visibility="gone"
-                            app:layout_constraintBottom_toBottomOf="@id/similarTvShowsRecycler"
-                            app:layout_constraintEnd_toEndOf="@id/similarTvShowsRecycler"
-                            app:layout_constraintStart_toStartOf="@id/similarTvShowsRecycler"
-                            app:layout_constraintTop_toTopOf="@id/similarTvShowsRecycler" />
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </androidx.cardview.widget.CardView>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/colorPrimary"
+                    app:layout_constraintBottom_toTopOf="@id/recommended"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/similar" />
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/recommended"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
-                    android:backgroundTint="@color/colorPrimary"
+                    android:backgroundTint="@color/colorPrimaryDark"
                     app:cardCornerRadius="10dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -546,23 +621,22 @@
                             android:layout_marginStart="4dp"
                             android:layout_marginEnd="4dp"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/recommendedTv2" />
 
                         <TextView
                             android:id="@+id/noRecommendationTv2"
                             android:layout_width="wrap_content"
-                            android:layout_height="150dp"
+                            android:layout_height="200dp"
                             android:gravity="center"
                             android:text="No recommendations available"
                             android:textColor="@color/white"
                             android:textSize="18sp"
                             android:visibility="gone"
-                            app:layout_constraintBottom_toBottomOf="@id/recommendedTvShowsRecycler"
-                            app:layout_constraintEnd_toEndOf="@id/recommendedTvShowsRecycler"
-                            app:layout_constraintStart_toStartOf="@id/recommendedTvShowsRecycler"
-                            app:layout_constraintTop_toTopOf="@id/recommendedTvShowsRecycler" />
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
