@@ -1,5 +1,6 @@
 package com.marius.personalimdb.ui.actors.details
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.marius.personalimdb.data.model.Actor
@@ -24,10 +25,7 @@ class ActorDetailsViewModel : ViewModel() {
 
     private fun getPosters(actorId: Int) {
         ActorRepository.getPhotos(actorId) {
-            val filteredPosters = it.filter {
-                it.ratio > 1.5
-            }
-            posters.value = filteredPosters.take(6)
+            posters.value = it.take(6)
         }
     }
 

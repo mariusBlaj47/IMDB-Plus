@@ -6,5 +6,6 @@ import com.marius.personalimdb.data.model.Photo
 
 data class ImagesResponse(
     @SerializedName(value = "backdrops") val results: List<Photo>?,
+    @SerializedName(value = "profiles") val profiles: List<Photo>?,
     @SerializedName(value = "results") val posters: List<Photo>?
 )

@@ -17,7 +17,7 @@ interface TmdbActorService {
         @Query("api_key") apiKey: String
     ): Call<Actor>
 
-    @GET("person/{person_id}/tagged_images")
+    @GET("person/{person_id}/images")
     fun getActorPosters(
         @Path("person_id") id: Int,
         @Query("api_key") apiKey: String

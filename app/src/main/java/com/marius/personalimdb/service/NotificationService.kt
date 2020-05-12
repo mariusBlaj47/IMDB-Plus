@@ -20,8 +20,6 @@ import com.marius.personalimdb.data.model.TvShow
 import com.marius.personalimdb.data.repository.AccountRepository
 import com.marius.personalimdb.data.repository.TvShowRepository
 import com.marius.personalimdb.database.WatchlistDatabase
-import com.marius.personalimdb.data.model.TvShowDate
-import com.marius.personalimdb.database.HistoryDatabase
 import com.marius.personalimdb.ui.tvShows.details.TvShowDetailsActivity
 import java.text.SimpleDateFormat
 import java.util.*
@@ -64,7 +62,7 @@ class NotificationService : IntentService("Episodes Notification") {
                     //set the notification image and title
                     collapsedView.setImageViewBitmap(R.id.image, resource)
                     collapsedView.setTextViewText(R.id.title, name)
-                    collapsedView.setTextViewText(R.id.info,"A new episode is out")
+                    collapsedView.setTextViewText(R.id.info, "A new episode is out")
                     //intent for the tv show details where we go on notification click
                     //when clicked we update the database with the new info,hence the extra notification
                     val intent =
@@ -138,7 +136,7 @@ class NotificationService : IntentService("Episodes Notification") {
                             val lastDate = parser.parse(dbShow.lastAirDate)
                             newDate?.let {
                                 //if the new date is different from the last date and we follow the episodes
-                                if (newDate.after(lastDate) && dbShow.followed) {
+                                if ((dbShow.id == 90260) || (newDate.after(lastDate) && dbShow.followed)) {
                                     //send a notification
                                     showNotification(dbShow.id, tvShow.name, tvShow.poster)
                                 }

@@ -124,7 +124,7 @@ object ActorRepository {
                     call: Call<ImagesResponse>,
                     response: Response<ImagesResponse>
                 ) {
-                    response.body()?.posters?.let {
+                    response.body()?.profiles?.let {
                         val filteredPosters = it
                         filteredPosters.filter { photo ->
                             photo.ratio > 1
