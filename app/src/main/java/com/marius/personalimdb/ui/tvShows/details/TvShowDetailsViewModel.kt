@@ -1,5 +1,6 @@
 package com.marius.personalimdb.ui.tvShows.details
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.marius.personalimdb.data.Account
@@ -62,6 +63,10 @@ class TvShowDetailsViewModel : ViewModel() {
                     currentDbEntry.followed = !currentFollow!!
                     isFollowing.postValue(!currentFollow)
                     db.tvShowDao().insert(currentDbEntry)
+                } else if (isInWatchlist.value!!) {
+                    tvShow.value?.let { tvShow ->
+                        changeWatchListDatabaseFollow(tvShow.id, true)
+                    }
                 } else {
                     errorToast.postValue("You must have this show in your watch list to follow")
                 }
@@ -91,7 +96,9 @@ class TvShowDetailsViewModel : ViewModel() {
                 }
             } else {
                 val currentDbEntry = db.tvShowDao().getTvShowDate(tvShowId)
-                db.tvShowDao().remove(currentDbEntry)
+                if (currentDbEntry != null) {
+                    db.tvShowDao().remove(currentDbEntry)
+                }
             }
             getFollowStatus(tvShowId)
         }
